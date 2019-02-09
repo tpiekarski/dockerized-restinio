@@ -1,0 +1,27 @@
+# Compiled Objects
+*.lo
+*.o
+*.obj
+*.slo
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled static and dynamic libraries
+*.a
+*.dll
+*.dylib
+*.la
+*.lai
+*.lib
+*.so
+
+# Executables
+*.app
+*.exe
+*.out
+
+# VS & VS Code directory
+/.vs/
+/.vscode/
