@@ -12,14 +12,14 @@ using std::cout;
 
 int main(int argc, char* argv[]) {
 
-  cout << "Starting RESTinio HTTP/Websocket server" << '\n'
+  cout << "Starting RESTinio HTTP/Websocket server" << '\n';
 
   restinio::run(
     restinio::on_this_thread()
       .port(8080)
       .address("localhost")
       .request_handler([] (auto request) {
-        cout << "Recieving request and sending response..." << '\n';
+        //cout << "Recieving request and sending response..." << '\n';
         return request->create_response().set_body("Hello world!").done();
       })
   );

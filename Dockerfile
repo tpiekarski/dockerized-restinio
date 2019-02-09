@@ -35,10 +35,11 @@ RUN mkdir out \
 FROM alpine:latest as runtime
 LABEL description="Runtime container for dockerized-restinio"
 
+RUN apk update && apk add --no-cache libstdc++
 RUN mkdir /usr/local/restinio
 COPY --from=build /src/out/dockerized-restinio /usr/local/dockerized-restinio/dockerized-restinio
 
-WORKDIR /usr/local/restinio
+WORKDIR /usr/local/dockerized-restinio
 CMD ./dockerized-restinio
 
 EXPOSE 8080
