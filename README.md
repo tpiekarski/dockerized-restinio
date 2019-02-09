@@ -1,5 +1,7 @@
 # dockerized-restinio
-*A lab repository for running RESTinio inside an staged Docker container with separated build and runtime images.*
+*A project for running [RESTinio](https://github.com/Stiffstream/restinio) inside a 
+[multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/) 
+[Docker](https://www.docker.com/) container with separated build and runtime stages.*
 
 ## Build
 ```
