@@ -17,9 +17,9 @@ int main(int argc, char* argv[]) {
   restinio::run(
     restinio::on_this_thread()
       .port(8080)
-      .address("localhost")
+      .address("0.0.0.0")
       .request_handler([] (auto request) {
-        //cout << "Recieving request and sending response..." << '\n';
+        cout << "Recieving request and sending response..." << '\n';
         return request->create_response().set_body("Hello world!").done();
       })
   );
