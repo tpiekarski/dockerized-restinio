@@ -25,3 +25,4 @@
 # VS & VS Code directory
 /.vs/
 /.vscode/
+*.code-workspace
