@@ -10,7 +10,7 @@ branches:
 
 install:
   - docker build --target build -t dockerized-restinio/build .
-  - docker build -t dockerized-restinio/runtime
+  - docker build -t dockerized-restinio/runtime .
   - docker run -d -p 8080:8080 --name restinio dockerized-restinio/runtime
 
 script:
