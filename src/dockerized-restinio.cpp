@@ -8,20 +8,23 @@
 #include <iostream>
 #include <restinio/all.hpp>
 
+#include "controller/readyness-controller.h"
+#include "router.h"
+
 using std::cout;
+using dockerized_restinio::Router;
+using dockerized_restinio::ReadynessController;
+
+const string Router::readyness_route  = "/ready";
 
 int main(int argc, char* argv[]) {
-
   cout << "Starting RESTinio HTTP/Websocket server" << '\n';
 
   restinio::run(
     restinio::on_this_thread()
       .port(8080)
       .address("0.0.0.0")
-      .request_handler([] (auto request) {
-        cout << "Recieving request and sending response..." << '\n';
-        return request->create_response().set_body("Hello world!").done();
-      })
+      .request_handler(ReadynessController())
   );
 
   return 0;
