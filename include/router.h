@@ -6,14 +6,12 @@
 using std::string;
 
 namespace dockerized_restinio {
-
 class Router {
-
+  
 public:
   static const string readyness_route;
 
 };
-
 } // ns dockerized_restintio
 
 #endif

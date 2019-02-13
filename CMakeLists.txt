@@ -10,7 +10,9 @@ set(INCLUDE "include/")
 include_directories(${INCLUDE})
 add_executable(
   dockerized-restinio
+  ${SOURCE}/controller/readyness-controller.cpp
   ${SOURCE}/dockerized-restinio.cpp
+  ${INCLUDE}/controller/readyness-controller.h
   ${INCLUDE}/router.h
 )
 
