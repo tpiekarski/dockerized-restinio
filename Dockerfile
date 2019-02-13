@@ -22,10 +22,10 @@ COPY x64-linux-musl.cmake /tmp/vcpkg/triplets/
 
 RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install boost-asio boost-filesystem fmt restinio
 
-COPY ./src /src
-WORKDIR /src
-RUN mkdir out \
-    && cd out \
+COPY ./ /dockerized-restinio
+WORKDIR /dockerized-restinio
+RUN mkdir build \
+    && cd build \
     && cmake .. -DCMAKE_TOOLCHAIN_FILE=/tmp/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-linux-musl \
     && make
 
@@ -36,11 +36,9 @@ FROM alpine:latest as runtime
 LABEL description="Runtime container for dockerized-restinio"
 
 RUN apk update && apk add --no-cache libstdc++
-RUN mkdir /usr/local/restinio
-COPY --from=build /src/out/dockerized-restinio /usr/local/dockerized-restinio/dockerized-restinio
+COPY --from=build /dockerized-restinio/build/dockerized-restinio /usr/local/bin/restinio
 
-WORKDIR /usr/local/dockerized-restinio
-CMD ./dockerized-restinio
+CMD /usr/local/bin/restinio
 
 EXPOSE 8080
 
