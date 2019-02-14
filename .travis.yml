@@ -15,4 +15,4 @@ install:
 
 script:
   - docker ps | grep -q restinio
-  - curl -X GET localhost:8080
+  - curl -X GET localhost:8080/ready
