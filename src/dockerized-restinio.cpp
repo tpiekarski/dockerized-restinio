@@ -9,13 +9,9 @@
 #include <restinio/all.hpp>
 
 #include "controller/readyness-controller.h"
-#include "router.h"
 
-using std::cout;
-using dockerized_restinio::Router;
 using dockerized_restinio::ReadynessController;
-
-const string Router::readyness_route  = "/ready";
+using std::cout;
 
 int main(int argc, char* argv[]) {
   cout << "Starting RESTinio HTTP/Websocket server" << '\n';

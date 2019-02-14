@@ -22,7 +22,7 @@ docker build -t dockerized-restinio/runtime .
 docker run -d -p 8080:8080 --name restinio dockerized-restinio/runtime
 ```
 
-## Reach RESTinio
+## Readyness Probe
 ```
-curl -vX GET localhost:8080
+curl -vX GET localhost:8080/ready
 ```
