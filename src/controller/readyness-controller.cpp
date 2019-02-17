@@ -15,18 +15,18 @@ namespace dockerized_restinio {
 
 const string ReadynessController::route = "/ready";
 
-request_handling_status_t ReadynessController::requestHandler(request_handle_t request) {
+request_handling_status_t ReadynessController::handleRequest(request_handle_t request) {
   if (http_method_get() != request->header().method() || request->header().request_target() != route) {
-      return request_rejected();
-    }
+    return request_rejected();
+  }
 
-    request->create_response(status_ok())
-      .append_header_date_field()
-      .append_header(http_field::server, "RESTinio")
-      .append_header(http_field::content_type, "text/plain; charset=utf-8")
-      .done();
+  request->create_response(status_ok())
+    .append_header_date_field()
+    .append_header(http_field::server, "RESTinio")
+    .append_header(http_field::content_type, "text/plain; charset=utf-8")
+    .done();
 
-    return request_accepted();
+  return request_accepted();
 }
 
 } // ns dockerized_restinio
