@@ -1,26 +1,30 @@
-#ifndef DOCKERIZED_RESTINIO_READYNESS_CONTROLLER
-#define DOCKERIZED_RESTINIO_READYNESS_CONTROLLER
+#ifndef DOCKERIZED_RESTINIO_READYNESS_CONTROLLER_H
+#define DOCKERIZED_RESTINIO_READYNESS_CONTROLLER_H
 
 #include <string>
 #include <restinio/request_handler.hpp>
+
+#include "controller-interface.h"
 
 using restinio::request_handle_t;
 using restinio::request_handling_status_t;
 using std::string;
 
 namespace dockerized_restinio {
-class ReadynessController {
+class ReadynessController : public ControllerInterface {
 
   public:
-    ReadynessController() = default;
+    ReadynessController() : route("/ready") {};
     ReadynessController(const ReadynessController& other) = default;
     ReadynessController(ReadynessController&& other) = default;
 
-    request_handling_status_t requestHandler(request_handle_t request);
-    request_handling_status_t operator() (request_handle_t request) { return requestHandler(request); }
+    request_handling_status_t handleRequest(request_handle_t request);
+    request_handling_status_t operator() (request_handle_t request) { return handleRequest(request); }
+
+    string getRoute() { return route; }
 
   private:
-    static const string route;
+    const string route;
 
 };
 } // ns dockerized_restinio
