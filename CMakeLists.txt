@@ -14,8 +14,9 @@ add_executable(
   ${SOURCE}/controller/readyness-controller.cpp
   ${SOURCE}/dockerized-restinio.cpp
 
-  ${INCLUDE}/controller/readyness-controller.h
   ${INCLUDE}/controller/controller-interface.h
+  ${INCLUDE}/controller/readyness-controller.h
+  ${INCLUDE}/dispatcher.h
 )
 
 find_package(Threads)

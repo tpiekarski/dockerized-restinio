@@ -8,9 +8,9 @@
 #include <iostream>
 #include <restinio/all.hpp>
 
-#include "controller/readyness-controller.h"
+#include "dispatcher.h"
 
-using dockerized_restinio::ReadynessController;
+using dockerized_restinio::Dispatcher;
 using std::cout;
 
 int main(int argc, char* argv[]) {
@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
     restinio::on_this_thread()
       .port(8080)
       .address("0.0.0.0")
-      .request_handler(ReadynessController())
+      .request_handler(Dispatcher())
   );
 
   return 0;
