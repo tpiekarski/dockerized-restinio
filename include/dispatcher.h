@@ -3,6 +3,7 @@
 
 #include "controller/readyness-controller.h"
 
+#include <map>
 #include <memory>
 #include <restinio/request_handler.hpp>
 #include <restinio/common_types.hpp>
@@ -11,9 +12,14 @@ using restinio::http_method_get;
 using restinio::request_handle_t;
 using restinio::request_handling_status_t;
 using restinio::request_rejected;
+using std::map;
 using std::unique_ptr;
 
 namespace dockerized_restinio {
+
+template<typename T> ControllerInterface * createController() { return new T; };
+typedef map<string, ControllerInterface * (*)()> controllerType;
+
 class Dispatcher {
 
   public:
@@ -23,13 +29,16 @@ class Dispatcher {
         return request_rejected();
       }
 
-      unique_ptr<ControllerInterface> controller(new ReadynessController()); 
+      controllerType routing;
+      routing["/ready"] = &createController<ReadynessController>;
 
-      if (request->header().request_target() == controller->getRoute()) {
-        return controller->handleRequest(request);
+      if (routing[request->header().request_target()] == nullptr) {
+        return request_rejected();
       }
 
-      return request_rejected();
+      unique_ptr<ControllerInterface> controller(routing[request->header().request_target()]());
+
+      return controller->handleRequest(request);
     }
 
 };

@@ -5,6 +5,7 @@
 #include <restinio/request_handler.hpp>
 
 #include "controller-interface.h"
+#include "route.h"
 
 using restinio::request_handle_t;
 using restinio::request_handling_status_t;
@@ -14,17 +15,17 @@ namespace dockerized_restinio {
 class ReadynessController : public ControllerInterface {
 
   public:
-    ReadynessController() : route("/ready") {};
+    ReadynessController() : route({"/ready", httpMethod::GET}) {};
     ReadynessController(const ReadynessController& other) = default;
     ReadynessController(ReadynessController&& other) = default;
 
     request_handling_status_t handleRequest(request_handle_t request);
     request_handling_status_t operator() (request_handle_t request) { return handleRequest(request); }
 
-    string getRoute() { return route; }
+    Route getRoute() { return route; }
 
   private:
-    const string route;
+    const Route route;
 
 };
 } // ns dockerized_restinio
