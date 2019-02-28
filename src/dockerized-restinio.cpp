@@ -10,7 +10,7 @@
 
 #include "dispatcher.h"
 
-using dockerized_restinio::Dispatcher;
+using namespace dockerized_restinio;
 using std::cout;
 
 int main(int argc, char* argv[]) {
