@@ -23,9 +23,10 @@ class Dispatcher {
         return request_rejected();
       }
 
+
       unique_ptr<ControllerInterface> controller(new ReadynessController()); 
 
-      if (request->header().request_target() == controller->getRoute()) {
+      if (request->header().request_target() == controller->getRoute().endpoint) {
         return controller->handleRequest(request);
       }
 
