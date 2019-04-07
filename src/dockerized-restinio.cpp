@@ -5,21 +5,26 @@
  *
  */
 
+
 #include <iostream>
 #include <restinio/all.hpp>
+#include <string>
 
 #include "dispatcher.h"
 
 using namespace dockerized_restinio;
 using std::cout;
 
+const int DEFAULT_PORT = 8080;
+const std::string DEFAULT_ADDRESS = "0.0.0.0";
+
 int main(int argc, char* argv[]) {
   cout << "Starting RESTinio HTTP/Websocket server" << '\n';
 
   restinio::run(
     restinio::on_this_thread()
-      .port(8080)
-      .address("0.0.0.0")
+      .port(DEFAULT_PORT)
+      .address(DEFAULT_ADDRESS)
       .request_handler(Dispatcher())
   );
 
