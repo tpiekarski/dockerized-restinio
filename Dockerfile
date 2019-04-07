@@ -20,7 +20,7 @@ RUN cd /tmp \
 
 COPY x64-linux-musl.cmake /tmp/vcpkg/triplets/
 
-RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install boost-asio boost-filesystem fmt restinio
+RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install boost-asio boost-filesystem boost-program-options fmt restinio
 
 COPY ./ /dockerized-restinio
 WORKDIR /dockerized-restinio
