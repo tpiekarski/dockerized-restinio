@@ -10,16 +10,32 @@
 #include <restinio/all.hpp>
 #include <string>
 
+#include <boost/program_options.hpp>
+namespace bpo = boost::program_options;
+
 #include "dispatcher.h"
 
 using namespace dockerized_restinio;
 using std::cout;
+using std::string;
 
 const int DEFAULT_PORT = 8080;
-const std::string DEFAULT_ADDRESS = "0.0.0.0";
+const string DEFAULT_ADDRESS = "0.0.0.0";
 
 int main(int argc, char* argv[]) {
-  cout << "Starting RESTinio HTTP/Websocket server" << '\n';
+
+  int port;
+  string address;
+
+  bpo::options_description optionsDescription("Allowed options");
+  optionsDescription.add_options()
+    ("port", bpo::value<int>(&port)->default_value(DEFAULT_PORT), "Port")
+    ("address", bpo::value<string>(&address)->default_value(DEFAULT_ADDRESS), "Address");
+  bpo::variables_map variablesMap;
+  bpo::store(bpo::parse_command_line(argc, argv, optionsDescription), variablesMap);
+  bpo::notify(variablesMap);
+
+  cout << "Starting RESTinio HTTP/Websocket server at " << address << ':' << port << '\n';
 
   restinio::run(
     restinio::on_this_thread()
