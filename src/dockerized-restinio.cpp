@@ -39,8 +39,8 @@ int main(int argc, char* argv[]) {
 
   restinio::run(
     restinio::on_this_thread()
-      .port(DEFAULT_PORT)
-      .address(DEFAULT_ADDRESS)
+      .port(port)
+      .address(address)
       .request_handler(Dispatcher())
   );
 
