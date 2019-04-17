@@ -26,3 +26,6 @@
 /.vs/
 /.vscode/
 *.code-workspace
+
+# Lab
+/lab

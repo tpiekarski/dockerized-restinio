@@ -26,3 +26,17 @@ docker run -d -p 8080:8080 --name restinio dockerized-restinio/runtime
 ```
 curl -vX GET localhost:8080/ready
 ```
+
+## Running with custom address and port
+For running the container and RESTinio inside it with custom address and port there are two options exposed to set up and use different values from the default ones.
+
+|#|Option|Default|
+|---|---|---|
+|1.|--address|0.0.0.0|
+|2.|--port|8080|
+
+### Example
+```
+docker run -d --rm -p 8085:8085 --expose 8085 dockerized-restinio/runtime --port 8085
+curl -vX GET localhost:8085/ready
+```

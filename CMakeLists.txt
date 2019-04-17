@@ -22,7 +22,7 @@ add_executable(
 find_package(Threads)
 find_package(fmt REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
-find_package(Boost REQUIRED COMPONENTS system filesystem)
+find_package(Boost REQUIRED COMPONENTS system filesystem program_options)
 find_package(restinio REQUIRED)
 
 target_link_libraries(

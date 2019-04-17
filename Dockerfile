@@ -38,7 +38,6 @@ LABEL description="Runtime container for dockerized-restinio"
 RUN apk update && apk add --no-cache libstdc++
 COPY --from=build /dockerized-restinio/build/dockerized-restinio /usr/local/bin/restinio
 
-CMD /usr/local/bin/restinio
-
+ENTRYPOINT [ "/usr/local/bin/restinio" ]
 EXPOSE 8080
 
