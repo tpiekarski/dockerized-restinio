@@ -5,7 +5,6 @@
  *
  */
 
-
 #include <iostream>
 #include <restinio/all.hpp>
 #include <string>
@@ -21,12 +20,12 @@ int main(int argc, char* argv[]) {
   Options options;
   options.parse(argc, argv);
 
-  cout << "Starting RESTinio HTTP/Websocket server at " << options.getAddress() << ':' << options.getPort() << '\n';
+  cout << "Starting RESTinio HTTP/Websocket server at " << options.address() << ':' << options.port() << '\n';
 
   restinio::run(
     restinio::on_this_thread()
-      .address(options.getAddress())
-      .port(options.getPort())
+      .address(options.address())
+      .port(options.port())
       .request_handler(Dispatcher())
   );
 

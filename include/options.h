@@ -28,18 +28,18 @@ class Options {
 
     void parse(int argc, char* argv[]);
 
-    string getAddress() { return address; }
-    int getPort() { return port; }
+    string address() { return address_; }
+    int port() { return port_; }
 
   private:
     static const string DEFAULT_ADDRESS;
     static const int DEFAULT_PORT;
 
-    bpo::options_description* optionsDescription;
-    bpo::variables_map* variablesMap;
+    bpo::options_description *optionsDescription_;
+    bpo::variables_map *variablesMap_;
     
-    string address;
-    int port;
+    string address_;
+    int port_;
 
 };
 } // ns dockerized_restinio
