@@ -5,7 +5,6 @@
  *
  */
 
-
 #include <iostream>
 #include <restinio/all.hpp>
 #include <string>
