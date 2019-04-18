@@ -22,17 +22,17 @@ namespace dockerized_restinio {
 class ReadynessController : public ControllerInterface {
 
   public:
-    ReadynessController() : route({"/ready", httpMethod::GET}) {};
+    ReadynessController() : route_({"/ready", httpMethod::GET}) {};
     ReadynessController(const ReadynessController& other) = default;
     ReadynessController(ReadynessController&& other) = default;
 
     request_handling_status_t handleRequest(request_handle_t request);
     request_handling_status_t operator() (request_handle_t request) { return handleRequest(request); }
 
-    Route getRoute() { return route; }
+    Route route() { return route_; }
 
   private:
-    const Route route;
+    const Route route_;
 
 };
 } // ns dockerized_restinio

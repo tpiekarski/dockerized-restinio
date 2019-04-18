@@ -20,7 +20,7 @@ class ControllerInterface {
     virtual ~ControllerInterface() {}
 
     virtual restinio::request_handling_status_t handleRequest(restinio::request_handle_t request) = 0;
-    virtual Route getRoute() = 0;
+    virtual Route route() = 0;
     
 };
 } // ns dockerized_restinio
