@@ -10,8 +10,9 @@ project(dockerized-restinio
   VERSION 0.1
 )
 
-set(SOURCE "src/")
-set(INCLUDE "include/")
+set(SOURCE "src")
+set(INCLUDE "include")
+set(TEST "test")
 
 include_directories(${INCLUDE})
 add_executable(
@@ -32,6 +33,22 @@ find_package(fmt REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system filesystem program_options unit_test_framework)
 find_package(restinio REQUIRED)
+
+include_directories (${Boost_INCLUDE_DIRS})
+
+enable_testing()
+file(GLOB TEST_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${TEST}/*.cpp)
+foreach(testSrc ${TEST_SRCS})
+  get_filename_component(testName ${testSrc} NAME_WE)
+  add_executable(${testName} ${testSrc})
+  target_link_libraries(${testName} ${Boost_LIBRARIES})
+  set_target_properties(${testName} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/testBin)
+  add_test(
+    NAME ${testName} 
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/testBin 
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/testBin/${testName}
+  )
+endforeach(testSrc)
 
 target_link_libraries(
   dockerized-restinio

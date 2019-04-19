@@ -27,7 +27,8 @@ WORKDIR /dockerized-restinio
 RUN mkdir build \
     && cd build \
     && cmake .. -DCMAKE_TOOLCHAIN_FILE=/tmp/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-linux-musl \
-    && make
+    && make \
+    && make test
 
 ###
 ### Runtime stage
