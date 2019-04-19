@@ -20,14 +20,15 @@ RUN cd /tmp \
 
 COPY x64-linux-musl.cmake /tmp/vcpkg/triplets/
 
-RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install boost-asio boost-filesystem boost-program-options fmt restinio
+RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install boost-asio boost-filesystem boost-program-options boost-test fmt restinio
 
 COPY ./ /dockerized-restinio
 WORKDIR /dockerized-restinio
 RUN mkdir build \
     && cd build \
     && cmake .. -DCMAKE_TOOLCHAIN_FILE=/tmp/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-linux-musl \
-    && make
+    && make \
+    && make test
 
 ###
 ### Runtime stage
