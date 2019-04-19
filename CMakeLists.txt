@@ -14,7 +14,6 @@ set(SOURCE "src")
 set(INCLUDE "include")
 set(TEST "test")
 
-include_directories(${INCLUDE})
 add_executable(
   dockerized-restinio
 
@@ -34,15 +33,25 @@ find_package(unofficial-http-parser REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system filesystem program_options unit_test_framework)
 find_package(restinio REQUIRED)
 
-include_directories (${Boost_INCLUDE_DIRS})
+include_directories (${INCLUDE} ${Boost_INCLUDE_DIRS})
+
+set(
+  LINK_TARGETS
+  ${CMAKE_THREAD_LIBS_INIT}
+  fmt::fmt
+  unofficial::http_parser::http_parser
+  ${Boost_LIBRARIES}
+  restinio::restinio
+)
 
 enable_testing()
 file(GLOB TEST_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${TEST}/*.cpp)
 foreach(testSrc ${TEST_SRCS})
   get_filename_component(testName ${testSrc} NAME_WE)
-  add_executable(${testName} ${testSrc})
-  target_link_libraries(${testName} ${Boost_LIBRARIES})
+  add_executable(${testName} ${testSrc} ${SOURCE}/options.cpp)
+  target_link_libraries(${testName} ${LINK_TARGETS} )
   set_target_properties(${testName} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/testBin)
+  set_property(TARGET ${testName} PROPERTY CXX_STANDARD 14)
   add_test(
     NAME ${testName} 
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/testBin 
@@ -50,14 +59,5 @@ foreach(testSrc ${TEST_SRCS})
   )
 endforeach(testSrc)
 
-target_link_libraries(
-  dockerized-restinio
-  PRIVATE
-    ${CMAKE_THREAD_LIBS_INIT}
-    fmt::fmt
-    unofficial::http_parser::http_parser
-    ${Boost_LIBRARIES}
-    restinio::restinio
-)
-
+target_link_libraries(dockerized-restinio PRIVATE ${LINK_TARGETS})
 set_property(TARGET dockerized-restinio PROPERTY CXX_STANDARD 14)
