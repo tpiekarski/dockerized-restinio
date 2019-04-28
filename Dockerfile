@@ -24,6 +24,7 @@ RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install boost-asio boost-fil
 
 COPY ./ /dockerized-restinio
 WORKDIR /dockerized-restinio
+ENV CTEST_OUTPUT_ON_FAILURE=1
 RUN mkdir build \
     && cd build \
     && cmake .. -DCMAKE_TOOLCHAIN_FILE=/tmp/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-linux-musl \
