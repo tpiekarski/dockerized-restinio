@@ -8,11 +8,13 @@
 #ifndef DOCKERIZED_RESTINIO_OPTIONS_H
 #define DOCKERIZED_RESTINIO_OPTIONS_H
 
+#include <iostream>
 #include <string>
 
 #include <boost/program_options.hpp>
 namespace bpo = boost::program_options;
 
+using std::ostream;
 using std::string;
 
 namespace dockerized_restinio {
@@ -30,6 +32,8 @@ class Options {
 
     string address() { return address_; }
     int port() { return port_; }
+
+    friend ostream& operator<<(ostream& os, Options& options);
 
   private:
     static const string DEFAULT_ADDRESS;

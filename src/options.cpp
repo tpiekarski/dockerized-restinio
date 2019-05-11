@@ -40,4 +40,10 @@ void Options::parse(int argc, char* argv[]) {
   bpo::notify(*variablesMap_);
 }
 
+ostream& operator<<(ostream& os, Options& options) {
+  os << options.address() << ":" << options.port();
+
+  return os;
+}
+
 } // ns dockerized_restinio

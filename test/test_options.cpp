@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(test_parsing_port_option) {
 BOOST_AUTO_TEST_CASE(test_overloaded_output_stream) {
   Options options;
   ostringstream test_stream;
-  
+
   test_stream << options;
 
   BOOST_CHECK_EQUAL(test_stream.str(), "0.0.0.0:8080");
