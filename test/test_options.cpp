@@ -8,9 +8,13 @@
 #define BOOST_TEST_MODULE "TestOptions"
 
 #include "options.h"
+#include <sstream>
+#include <string>
 #include <vector>
 #include <boost/test/unit_test.hpp>
 
+using std::ostringstream;
+using std::string;
 using std::vector;
 using namespace dockerized_restinio;
 
@@ -60,4 +64,13 @@ BOOST_AUTO_TEST_CASE(test_parsing_port_option) {
 
   BOOST_CHECK_EQUAL(options.address(), "0.0.0.0");
   BOOST_CHECK_EQUAL(options.port(), 8085);
+}
+
+BOOST_AUTO_TEST_CASE(test_overloaded_output_stream) {
+  Options options;
+  ostringstream test_stream;
+
+  test_stream << options;
+
+  BOOST_CHECK_EQUAL(test_stream.str(), "0.0.0.0:8080");
 }
