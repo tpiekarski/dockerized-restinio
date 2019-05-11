@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
   Options options;
   options.parse(argc, argv);
 
-  cout << "Starting RESTinio HTTP/Websocket server at " << options.address() << ':' << options.port() << '\n';
+  cout << "Starting RESTinio HTTP/Websocket server at " << options << '\n';
 
   restinio::run(
     restinio::on_this_thread()
